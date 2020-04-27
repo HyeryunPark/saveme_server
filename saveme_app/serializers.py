@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
-from saveme_app.models import User, Missing, Shelter
+from saveme_app.models import Missing, Shelter
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 # Serializer 란?
@@ -23,11 +25,38 @@ from saveme_app.models import User, Missing, Shelter
 #   to_representation()
 
 
+# User Serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User  # 모델 설정
-        # fields = ('userEmail', 'userPw')  # 필드 설정
-        fields = '__all__'
+        fields = ('id', 'username', 'email')  # 필드 설정
+        # fields = '__all__'
+
+
+# Register Serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User  # 모델 설정
+        fields = ('id', 'username', 'email', 'password')  # 필드 설정
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            validated_data['username'], validated_data['email'], validated_data['password']
+        )
+        return user
+
+
+# Login Serializer
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Unable to log in with provided credentials.")
 
 
 class ShelterSerializer(serializers.ModelSerializer):

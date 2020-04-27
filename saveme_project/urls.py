@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 from saveme_app import views
 
 router = DefaultRouter()
-router.register(r'users', views.UserViewSet)
+# router.register(r'users', views.UserViewSet)
 router.register(r'shelters', views.ShelterViewSet)
 router.register(r'missings', views.MissingViewSet)  # prefix = missings, viewset = MissingViewSet
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path('saveme_app/', include('saveme_app.urls')),
     path('', include(router.urls)),
     re_path('admin/', admin.site.urls),
+    path('saveme_app/auth', include('knox.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
