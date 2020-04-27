@@ -6,6 +6,7 @@ from django.db import models
 
 class User(models.Model):
     userEmail = models.CharField(max_length=25, unique=True, default='')
+    userName = models.CharField(max_length=10, default='')
     userPw = models.CharField(max_length=25, default='')
 
     def __str__(self):

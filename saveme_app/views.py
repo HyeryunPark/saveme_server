@@ -1,7 +1,10 @@
-from django.shortcuts import render
-
 # Create your views here.
+import json
+
+import requests
+import xmltodict
 from rest_framework import viewsets
+
 from saveme_app.models import User, Missing, Shelter
 from saveme_app.serializers import UserSerializer, MissingSerializer, ShelterSerializer
 
