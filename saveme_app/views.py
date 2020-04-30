@@ -21,6 +21,7 @@ from saveme_app.serializers import UserSerializer, RegisterSerializer, LoginSeri
 #             queryset = queryset.filter(userEmail=email)
 #         return queryset
 
+# User API
 class UserAPI(generics.RetrieveAPIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
@@ -29,7 +30,7 @@ class UserAPI(generics.RetrieveAPIView):
         return self.request.user
 
 
-# Register API
+# Register API (회원가입)
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
@@ -47,7 +48,7 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 
-# Login API
+# Login API (로그인)
 class LoginAPI(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
