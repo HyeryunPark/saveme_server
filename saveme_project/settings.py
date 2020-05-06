@@ -37,7 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'saveme_app',
+    'knox',  # django-rest-knox : 장고의 rest 인증 모듈
 ]
+
+REST_FRAMEWORK = {  # django-rest-framework
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,5 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # 미디어파일 업로드를 위한 코드 추가
-MEDIA_URL = '/media/'   # MEDIA_ROOT 에 접근할 URL
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')    # 사용자가 업로드한 파일 관리, 파일을 업로드 할 장소
+MEDIA_URL = '/media/'  # MEDIA_ROOT 에 접근할 URL
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 사용자가 업로드한 파일 관리, 파일을 업로드 할 장소

@@ -6,6 +6,7 @@ from django.db import models
 
 class User(models.Model):
     userEmail = models.CharField(max_length=25, unique=True, default='')
+    userName = models.CharField(max_length=10, default='')
     userPw = models.CharField(max_length=25, default='')
 
     def __str__(self):
@@ -56,3 +57,12 @@ class Missing(models.Model):
     image2 = models.ImageField(upload_to='missingBoard/images', blank=True, null=True, help_text='사진2')
     image3 = models.ImageField(upload_to='missingBoard/images', blank=True, null=True, help_text='사진3')
 
+
+class Community(models.Model):
+    user_id = models.CharField(max_length=100, default='', help_text='작성자 uid')
+    writing_date = models.DateTimeField(help_text='작성한 날짜')
+    writing_title = models.CharField(max_length=20, default='', help_text='글 제목')
+    writing_content = models.CharField(max_length=100, default='', help_text='글 내용')
+    img1 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진1')
+    img2 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진2')
+    img3 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진3')
