@@ -25,6 +25,7 @@ router = DefaultRouter()
 # router.register(r'users', views.UserViewSet)
 router.register(r'shelters', views.ShelterViewSet)
 router.register(r'missings', views.MissingViewSet)  # prefix = missings, viewset = MissingViewSet
+router.register(r'community', views.CommunityViewSet)
 
 urlpatterns = [
     path('saveme_app/', include('saveme_app.urls')),
