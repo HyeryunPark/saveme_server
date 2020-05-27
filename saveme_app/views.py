@@ -4,9 +4,9 @@ from knox.models import AuthToken
 from rest_framework import viewsets, generics, permissions
 from rest_framework.response import Response
 
-from saveme_app.models import Missing, Shelter, Community
+from saveme_app.models import Missing, Shelter, Community, NewsData
 from saveme_app.serializers import UserSerializer, RegisterSerializer, LoginSerializer, MissingSerializer, \
-    ShelterSerializer, CommunitySerializer
+    ShelterSerializer, CommunitySerializer, NewsDataSerializer
 
 
 # class UserViewSet(viewsets.ModelViewSet):
@@ -69,10 +69,16 @@ class ShelterViewSet(viewsets.ModelViewSet):
 
 
 class MissingViewSet(viewsets.ModelViewSet):
-    queryset = Missing.objects.all()
+    # queryset = Missing.objects.all()
+    queryset = Missing.objects.all().order_by('-id')  # 역순으로 데이터 정렬
     serializer_class = MissingSerializer
 
 
 class CommunityViewSet(viewsets.ModelViewSet):
-    queryset = Community.objects.all()
+    queryset = Community.objects.all().order_by('-id')
     serializer_class = CommunitySerializer
+
+
+class NewsDataViewSet(viewsets.ModelViewSet):
+    queryset = NewsData.objects.all()
+    serializer_class = NewsDataSerializer

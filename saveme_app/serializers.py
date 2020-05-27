@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from saveme_app.models import Missing, Shelter, Community
+from saveme_app.models import Missing, Shelter, Community, NewsData
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
@@ -74,4 +74,10 @@ class MissingSerializer(serializers.ModelSerializer):
 class CommunitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Community
+        fields = '__all__'
+
+
+class NewsDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsData
         fields = '__all__'

@@ -42,7 +42,7 @@ class Missing(models.Model):
     detailLocation = models.CharField(max_length=30, default='', help_text='상세주소')
     phone = models.CharField(max_length=11, default='', help_text='작성자 핸드폰번호')
     species = models.CharField(max_length=5, default='', help_text='동물 종')
-    breed = models.CharField(max_length=20, default='', help_text='동물 품종')
+    breed = models.CharField(max_length=50, default='', help_text='동물 품종')
     gender = models.CharField(max_length=3, default='', help_text='성별')
     neuter = models.BooleanField(default=False, help_text='중성화여부')
     age = models.CharField(max_length=10, default='', help_text='나이')
@@ -60,9 +60,19 @@ class Missing(models.Model):
 
 class Community(models.Model):
     user_id = models.CharField(max_length=100, default='', help_text='작성자 uid')
-    writing_date = models.DateTimeField(help_text='작성한 날짜')
-    writing_title = models.CharField(max_length=20, default='', help_text='글 제목')
-    writing_content = models.CharField(max_length=100, default='', help_text='글 내용')
+    user_name = models.CharField(max_length=10, default='', help_text='작성자 이름')
+    community_category = models.CharField(max_length=20, default='', help_text='글 카테고리')
+    community_date = models.DateTimeField(auto_now_add=True, help_text='작성한 날짜')
+    community_title = models.CharField(max_length=20, default='', help_text='글 제목')
+    community_content = models.CharField(max_length=100, default='', help_text='글 내용')
     img1 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진1')
     img2 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진2')
     img3 = models.ImageField(upload_to='communityBoard/images', blank=True, null=True, help_text='사진3')
+
+
+class NewsData(models.Model):
+    title = models.CharField(max_length=200, help_text="뉴스 제목")
+    link = models.URLField(null=True, default="", help_text="뉴스 링크")
+
+    def __str__(self):
+        return self.title
